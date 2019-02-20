@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WEB_START</title>
+</head>
+<!--<body onload="helloWorld()">-->
+<body>
+
+    <!--<button onclick="helloWorld()">Click Me!</button>-->
+
+    <!--<input type="submit"  onclick="helloWorld()">-->
+
+    <!--onfocus - дія при наведенні-->
+    <!--onblur - дія при тому коли знімаєш виділення-->
+
+    <!--<input type="text"  onblur="helloWorld()">-->
+
+    <!--<select onchange="alert_value('Joiajhsdlhaslkhdaslkhdkjah')">-->
+        <!--<option value="First">First</option>-->
+        <!--<option value="Second">Second</option>-->
+        <!--<option value="Third">Third</option>-->
+    <!--</select>-->
+
+
+
+    <!--<input type="text"  onchange="alert_value('that was input blur')">-->
+
+    <!--<select onchange="alert_value('that was select change')">-->
+        <!--<option value="First">First</option>-->
+        <!--<option value="Second">Second</option>-->
+        <!--<option value="Third">Third</option>-->
+    <!--</select>-->
+
+    <!--<input type="text"  onchange="alert_value('text input = '+ this.value)">-->
+
+    <!--<select onchange="alert_value(this.value + ' - selected')">-->
+        <!--<option value="First">First</option>-->
+        <!--<option value="Second">Second</option>-->
+        <!--<option value="Third">Third</option>-->
+    <!--</select>-->
+
+    <button onclick="initVegSelect()">Init vegSelect</button>
+
+    <select id="vegSelect"></select>
+    <br>
+
+    <input type="text" id="newEl" placeholder="Name new vegetables">
+    <button onclick="addButtonClick()">Додати елемент</button>
+
+    <br>
+
+    <ul id="massiveElements">
+
+    </ul>
+    <script>
+
+        function helloWorld(){
+            alert('Hello World!');
+        }
+
+        // helloWorld();
+
+        function alert_value(value) {
+
+            alert(value);
+
+        }
+
+        var vegetables = [];
+
+        function setDefaultVegetables() {
+            vegetables = ['Cucumber','Tomato','Misha','Potato'];
+        }
+
+        setDefaultVegetables();
+
+        var vegSelect = document.getElementById('vegSelect');
+
+
+        function initVegSelect() {
+            vegSelect.innerHTML = '';
+
+            for (var i=0;i<vegetables.length;i++){
+                vegSelect.innerHTML = vegSelect.innerHTML + '<option value="'+vegetables[i]+'">'+vegetables[i]+'</option>';
+            }
+        }
+
+        function addNewVeg(name) {
+            vegetables.push(name);
+            updateList();
+        }
+        function removeElement(id) {
+            var newVegetables = [];
+            for (var i = 0;i<vegetables.length;i++){
+                if (i!=id){
+                    newVegetables.push(vegetables[i]);
+                }
+            }
+            vegetables = newVegetables;
+            updateList();
+        }
+
+
+        function addButtonClick() {
+            var inpText = document.getElementById('newEl');
+            addNewVeg(inpText.value);
+            inpText.value = '';
+        }
+
+        function updateList() {
+            var list = document.getElementById('massiveElements');
+
+            list.innerHTML = '';
+
+            for (var i=0;i<vegetables.length;i++){
+                list.innerHTML = list.innerHTML + '<li>'+vegetables[i]+'<button style="color: red" onclick="removeElement('+i+')">X</button></li>';
+            }
+        }
+    </script>
+</body>
+</html>
