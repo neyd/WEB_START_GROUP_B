@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>WEB_START</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <!--<body onload="helloWorld()">-->
 <body>
@@ -22,8 +23,6 @@
         <!--<option value="Third">Third</option>-->
     <!--</select>-->
 
-
-
     <!--<input type="text"  onchange="alert_value('that was input blur')">-->
 
     <!--<select onchange="alert_value('that was select change')">-->
@@ -40,19 +39,26 @@
         <!--<option value="Third">Third</option>-->
     <!--</select>-->
 
-    <button onclick="initVegSelect()">Init vegSelect</button>
+    <header>
+        Module1
+        <div class="main_menu" id="main_menu"></div>
+    </header>
+    <main>
+        <button onclick="initVegSelect()">Init vegSelect</button>
 
-    <select id="vegSelect"></select>
-    <br>
+        <select id="vegSelect"></select>
 
-    <input type="text" id="newEl" placeholder="Name new vegetables">
-    <button onclick="addButtonClick()">Додати елемент</button>
+        <br>
 
-    <br>
+        <input type="text" id="newEl" placeholder="Name new vegetables">
+        <button onclick="addButtonClick()">Додати елемент</button>
 
-    <ul id="massiveElements">
+        <br>
 
-    </ul>
+        <ul id="massiveElements"></ul>
+
+        <br>
+    </main>
     <script>
 
         function helloWorld(){
@@ -90,10 +96,13 @@
             vegetables.push(name);
             updateList();
         }
+
         function removeElement(id) {
             var newVegetables = [];
             for (var i = 0;i<vegetables.length;i++){
-                if (i!=id){
+                if (i==id){
+                    alert(vegetables[i]);
+                } else {
                     newVegetables.push(vegetables[i]);
                 }
             }
@@ -114,9 +123,13 @@
             list.innerHTML = '';
 
             for (var i=0;i<vegetables.length;i++){
-                list.innerHTML = list.innerHTML + '<li>'+vegetables[i]+'<button style="color: red" onclick="removeElement('+i+')">X</button></li>';
+                list.innerHTML = list.innerHTML + '<li>'+(i+1)+'. '+vegetables[i]+'<button style="color: red" onclick="removeElement('+i+')">X</button></li>';
             }
         }
+    </script>
+    <script type="text/javascript" src="main_menu.js"></script>
+    <script>
+        initMainMenu(0);
     </script>
 </body>
 </html>

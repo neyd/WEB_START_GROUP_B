@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DoubleArrays</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        Module1
+        <div class="main_menu" id="main_menu"></div>
+    </header>
+    <main>
+        <div class="add_user_form">
+            <div class="form-name">
+                <h3>Додати користувача</h3>
+            </div>
+            <div class="form-inputs">
+                <div class="form-control">
+                    <label for="lastname">Прізвище</label>
+                    <input type="text" id="lastname" placeholder="Прізвище">
+                </div>
+                <div class="form-control">
+                    <label for="name">Ім'я</label>
+                    <input type="text" id="name" placeholder="Ім'я">
+                </div>
+                <div class="form-control">
+                    <label for="pbname">По-батькові</label>
+                    <input type="text" id="pbname" placeholder="По-батькові">
+                </div>
+                <div class="form-control">
+                    <label for="age">Вік</label>
+                    <input type="text" id="age" placeholder="Вік">
+                </div>
+                <div class="form-control">
+                    <label for="birth">Дата народження</label>
+                    <input type="text" id="birth" placeholder="Дата народження">
+                </div>
+                <div class="form-control">
+                    <label for="marital">Сімейний стан</label>
+                   <select id="marital">
+                       <option>-Виберіть-</option>
+                       <option value="Home alone">Home alone</option>
+                       <option value="Not alone">Not alone</option>
+                       <option value="Babich">Babich</option>
+                       <option value="Maried">Maried</option>
+                   </select>
+                </div>
+            </div>
+            <div class="form-submit">
+                <input type="submit" id="addUser" value="Додати">
+            </div>
+        </div>
+        <table>
+            <thead>
+                <caption>Користувачі</caption>
+                <tr>
+                    <th>Призвіще</th>
+                    <th>Ім'я</th>
+                    <th>По батькові</th>
+                    <th>Вік</th>
+                    <th>Дата народження</th>
+                    <th>Сімейний стан</th>
+                </tr>
+            </thead>
+            <tbody id="mainUserList">
+
+            </tbody>
+        </table>
+    </main>
+    <script type="text/javascript" src="main_menu.js"></script>
+    <script>
+        initMainMenu(1);
+    </script>
+
+    <script>
+        var usersList = [];
+        
+        function addNewUser(lastName,Name,PbName,age,birth,marital) {
+            usersList.push([lastName,Name,PbName,age,birth,marital]);
+            initUsersList();
+        }
+
+        addNewUser('Neydel','Yevhen','Vladimirovich','21','01.01.1998','Not alone');
+        addNewUser('Chikinin','Vasil','Sankovich','26','24.06.1992','Home alone');
+        addNewUser('Scherbanych','Vitaliy','Vitaliyovich','22','17.07.1997','Not alone');
+        addNewUser('Shandra','Mihaylo','Mihaylovich','19','09.11.1999','Babich');
+        addNewUser('Barta','Adalbert','Adalbertovich','29','10.07.1989','Married');
+
+        function initUsersList() {
+            var tbody = document.getElementById('mainUserList');
+
+            var innerUsers = '';
+            for (var i=0;i<usersList.length;i++){
+                innerUsers += "<tr>";
+
+                    for (var j=0;j<usersList[i].length;j++){
+                        innerUsers += "<td>"+usersList[i][j]+"</td>";
+                    }
+
+                innerUsers += "</tr>";
+            }
+
+            tbody.innerHTML = innerUsers;
+        }
+
+        // usersList[~Порядковий номер користувача в масиві~][~Порядковий номер елемента~] = ~Нове значення передане з форми~
+
+        function addUserFromForm() {
+            var lastName = document.getElementById('lastname');
+            var name = document.getElementById('name');
+            var pbName = document.getElementById('pbname');
+            var age = document.getElementById('age');
+            var birth = document.getElementById('birth');
+            var marital = document.getElementById('marital');
+
+            addNewUser(lastName.value,name.value,pbName.value,age.value,birth.value,marital.value);
+            alert('Пак додано.');
+
+            lastName.value = '';
+            name.value = '';
+            pbName.value = '';
+            age.value = '';
+            birth.value = '';
+            marital.value = '';
+        }
+
+        document.getElementById('addUser').addEventListener('click',addUserFromForm);
+    </script>
+</body>
+</html>
